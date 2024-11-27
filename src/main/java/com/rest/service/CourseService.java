@@ -10,7 +10,8 @@ public interface CourseService {
     CourseDTO getCourseById(Long courseId);
     List<CourseDTO> getCoursesByCategory(String category);
     List<CourseDTO> getCourses();
-    void updateCourse(Long courseId, CourseDTO courseDTO);
+    CourseDTO updateCourse(Long courseId, CourseDTO courseDTO);
+   // void updateCourseWithoutBody(Long id, CourseDTO courseDTO);
     void deleteCourseById(Long courseId);
     void deleteCourses();
 }

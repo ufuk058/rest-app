@@ -7,7 +7,9 @@ import com.rest.service.CourseService;
 import com.rest.util.MapperUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +24,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CourseDTO createCourse(CourseDTO course) {
+
          courseRepository.save(mapperUtil.convert(course, new Course()));
          return course;
     }
@@ -45,7 +48,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void updateCourse(Long courseId, CourseDTO courseDTO) {
+    public CourseDTO updateCourse(Long courseId, CourseDTO courseDTO) {
 
         Course course= mapperUtil.convert(courseDTO, new Course());
         courseRepository.findById(courseId).ifPresent(dbCourse-> {
@@ -56,11 +59,25 @@ public class CourseServiceImpl implements CourseService {
 
             courseRepository.save(dbCourse);
         });
+
+        return mapperUtil.convert(course,new CourseDTO());
     }
+
+//    @Override
+//    public void updateCourseWithoutBody(Long id, CourseDTO courseDTO) {
+//        Course course= mapperUtil.convert(courseDTO, new Course());
+//        courseRepository.findById(id).ifPresent(dbCourse-> {
+//            dbCourse.setName(course.getName());
+//            dbCourse.setCategory(course.getCategory());
+//            dbCourse.setRating(course.getRating());
+//            dbCourse.setDescription(course.getDescription());
+//
+//            courseRepository.save(dbCourse);
+//        });
+//    }
 
     @Override
     public void deleteCourseById(Long courseId) {
-
         courseRepository.deleteById(courseId);
     }
 
