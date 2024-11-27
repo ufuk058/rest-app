@@ -53,4 +53,10 @@ public class CourseController {
     public void deleteCourseById(@PathVariable Long id){
         courseService.deleteCourseById(id);
     }
+
+    @GetMapping("/category/{category}")
+    public List<CourseDTO> getAllCoursesByCategory(@PathVariable("category") String category){
+
+        return courseService.getCoursesByCategory(category);
+    }
 }
